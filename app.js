@@ -168,7 +168,6 @@ downloadBtn.addEventListener('click', async () => {
 
         const zip = new JSZip();
         
-        // Split script tags safely to avoid text spilling inside code boxes
         const standaloneHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
