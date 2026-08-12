@@ -18,16 +18,68 @@
         h1 { color: #ffffff; font-size: 2.5rem; margin-bottom: 10px; }
         p { color: #aaaaaa; font-size: 1.1rem; margin-bottom: 30px; }
         .counter-container { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-        .counter-badge { background: #252525; border: 1px solid #333; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem; color: #007bff; font-weight: bold; }
-        .reset-btn { background: none; border: none; color: #ff4d4d; font-size: 0.85rem; cursor: pointer; text-decoration: underline; padding: 0; }
+        .counter-badge { 
+            background: #252525; 
+            border: 1px solid #333; 
+            padding: 6px 16px; 
+            border-radius: 20px; 
+            font-size: 0.9rem; 
+            color: #007bff; 
+            font-weight: bold; 
+        }
+        .reset-btn { 
+            background: none; 
+            border: none; 
+            color: #ff4d4d; 
+            font-size: 0.85rem; 
+            cursor: pointer; 
+            text-decoration: underline; 
+            padding: 0; 
+        }
         .reset-btn:hover { color: #ff3333; }
-        .upload-zone { border: 3px dashed #333; padding: 50px 20px; margin: 10px 0 20px 0; border-radius: 12px; cursor: pointer; background: #1e1e1e; transition: all 0.2s ease-in-out; }
+        .upload-zone { 
+            border: 3px dashed #333; 
+            padding: 50px 20px; 
+            margin: 10px 0 20px 0; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            background: #1e1e1e; 
+            transition: all 0.2s ease-in-out; 
+        }
         .upload-zone:hover { border-color: #007bff; background: #252525; }
         .upload-zone p { margin: 0; color: #888; }
-        #player-container { width: 100%; height: 550px; display: none; background: #000; margin-top: 30px; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        button { background: #007bff; color: white; border: none; padding: 14px 28px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; display: none; margin: 30px auto 0 auto; transition: background 0.2s; }
+        #player-container { 
+            width: 100%; 
+            height: 550px; 
+            display: none; 
+            background: #000; 
+            margin-top: 30px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+        }
+        button { 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            padding: 14px 28px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            display: none; 
+            margin: 30px auto 0 auto; 
+            transition: background 0.2s; 
+        }
         button:hover { background: #0056b3; }
-        .history-section { margin-top: 50px; text-align: left; background: #1e1e1e; border: 1px solid #333; border-radius: 12px; padding: 20px; }
+        .history-section { 
+            margin-top: 50px; 
+            text-align: left; 
+            background: #1e1e1e; 
+            border: 1px solid #333; 
+            border-radius: 12px; 
+            padding: 20px; 
+        }
         .history-section h3 { margin-top: 0; color: #fff; border-bottom: 1px solid #333; padding-bottom: 10px; }
         .history-list { list-style: none; padding: 0; margin: 0; max-height: 250px; overflow-y: auto; }
         .history-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #2a2a2a; }
@@ -36,32 +88,48 @@
         .history-name { color: #007bff; font-weight: 500; }
         .history-name:hover { text-decoration: underline; }
         .history-date { font-size: 0.75rem; color: #666; margin-top: 2px; }
-        .delete-history-btn { background: #ff4d4d; color: white; border: none; padding: 4px 8px; font-size: 0.75rem; border-radius: 4px; cursor: pointer; }
+        .delete-history-btn { 
+            background: #ff4d4d; 
+            color: white; 
+            border: none; 
+            padding: 4px 8px; 
+            font-size: 0.75rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         .delete-history-btn:hover { background: #ff3333; }
         .no-history { color: #666; font-style: italic; padding: 10px 0; }
     </style>
+
+    <!-- Corrected CDNs -->
     <script src="https://unpkg.com"></script>
-    <script src="https://cloudflare.com"></script>
+    <script src="https://unpkg.com"></script>
 </head>
 <body>
-<div class="container">
-    <h1>SWF to HTML5 Flash Converter</h1>
-    <p>Upload a standalone Flash project to simulate execution loops and build custom web deployment packages natively.</p>
-    <div class="counter-container">
-        <div class="counter-badge" id="counterBadge">Total Files Processed: 0</div>
-        <button class="reset-btn" id="resetBtn" title="Clear saved history">Reset</button>
+    <div class="container">
+        <h1>SWF to HTML5 Flash Converter</h1>
+        <p>Upload a standalone Flash project to simulate execution loops and build custom web deployment packages natively.</p>
+        
+        <div class="counter-container">
+            <div class="counter-badge" id="counterBadge">Total Files Processed: 0</div>
+            <button class="reset-btn" id="resetBtn" title="Clear saved history">Reset</button>
+        </div>
+        
+        <div class="upload-zone" id="dropZone">
+            <p id="uploadText">Drag & drop your game.swf here, or click to browse files</p>
+            <input type="file" id="fileInput" accept=".swf" style="display: none;">
+        </div>
+        
+        <button id="downloadBtn">Download HTML5 Project Package (.zip)</button>
+        <div id="player-container"></div>
+        
+        <div class="history-section">
+            <h3>Conversion History</h3>
+            <ul class="history-list" id="historyList"></ul>
+        </div>
     </div>
-    <div class="upload-zone" id="dropZone">
-        <p id="uploadText">Drag & drop your game.swf here, or click to browse files</p>
-        <input type="file" id="fileInput" accept=".swf" style="display: none;">
-    </div>
-    <button id="downloadBtn">Download HTML5 Project Package (.zip)</button>
-    <div id="player-container"></div>
-    <div class="history-section">
-        <h3>Conversion History</h3>
-        <ul class="history-list" id="historyList"></ul>
-    </div>
-</div>
-<script src="app.js"></script>
+
+    <!-- Link to your external JavaScript file -->
+    <script src="app.js"></script>
 </body>
 </html>
